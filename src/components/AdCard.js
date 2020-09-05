@@ -34,12 +34,12 @@ export default function Ad({ ad }) {
 					href={HA_AD_URL + ad.ad.slug}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="block text-lg sm:text-xl mb-2 md:break-all hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors duration-300"
+					className="block text-lg sm:text-xl font-semibold mb-2 sm:break-all hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors duration-300"
 				>
 					{ad.ad.title}
 				</a>
 				<div className="text-lg text-green-600 font-semibold">{priceTag}</div>
-				<div className="mt-4 sm:mt-auto font-semibold">
+				<div className="mt-4 sm:mt-auto">
 					<a
 						target="_blank"
 						rel="noopener noreferrer"

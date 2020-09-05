@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Header from "./components/Header";
+import Spinner from "./components/Spinner";
 import AdCard from "./components/AdCard";
 
 function App() {
@@ -30,12 +31,13 @@ function App() {
 	}, [query]);
 
 	return (
-		<div className="antialiased min-h-screen max-h-full flex flex-col items-center bg-gray-300 dark:bg-gray-700 dark:text-white transition-all duration-300">
+		<div className="antialiased min-h-screen max-h-full flex flex-col items-center bg-gray-300 dark:bg-gray-900 dark:text-white transition-colors duration-300">
 			<Header clearAll={clearAll} getQuery={(newQuery) => setQuery(newQuery)}></Header>
-			{loading && <h1 className="text-2xl mt-auto mb-auto">Loading...</h1>}
-			{ads.map((ad, i) => (
-				<AdCard key={i} ad={ad}></AdCard>
-			))}
+			{loading && <Spinner></Spinner>}
+			{ads.length > 0 &&
+				ads.map((ad, i) => {
+					return <AdCard key={i} ad={ad}></AdCard>;
+				})}
 		</div>
 	);
 }
