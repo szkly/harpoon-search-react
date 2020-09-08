@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import SearchIcon from "./SearchIcon";
 import SearchHistory from "./SearchHistory";
 
+import useLocalStorage from "../hooks/useLocalStorage";
+
 export default function SearchBar({ getQuery }) {
 	const [query, setQuery] = useState("");
-	const [searchHistory, setSearchHistory] = useState([]);
+	const [searchHistory, setSearchHistory] = useLocalStorage("searchHistory", []);
 	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		const searchHistoryStorage = localStorage.getItem("searchHistory") ? JSON.parse(localStorage.getItem("searchHistory")) : [];
-
-		setSearchHistory(searchHistoryStorage);
-	}, []);
 
 	const handleSubmit = () => {
 		if (!searchHistory.includes(query) && query !== "") {
 			setSearchHistory((items) => [...items, query]);
-			const newSearchHistory = [...searchHistory, query];
-			localStorage.setItem("searchHistory", JSON.stringify(newSearchHistory));
 		}
-
 		getQuery(query);
 	};
 
@@ -31,14 +24,12 @@ export default function SearchBar({ getQuery }) {
 
 	const handleDeletingItem = (item) => {
 		const newSearchHistory = searchHistory.length === 1 ? [] : searchHistory.filter((currItem) => currItem !== item);
-		localStorage.setItem("searchHistory", JSON.stringify(newSearchHistory));
 		setSearchHistory(newSearchHistory);
 	};
 
 	const handleClearAll = () => {
 		setSearchHistory([]);
 		setQuery("");
-		localStorage.setItem("searchHistory", JSON.stringify([]));
 	};
 
 	return (
