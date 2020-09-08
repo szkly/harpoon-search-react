@@ -1,6 +1,6 @@
 import React from "react";
 
-import CloseIcon from "./CloseIcon";
+import CloseIcon from "./icons/CloseIcon";
 
 export default function SearchHistory({ history, retrieveQuery, deleteItem, clearAll }) {
 	return (

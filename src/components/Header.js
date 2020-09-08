@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import SearchBar from "./SearchBar";
-import SearchIcon from "./SearchIcon";
-import CloseIcon from "./CloseIcon";
+import SearchIcon from "./icons/SearchIcon";
+import CloseIcon from "./icons/CloseIcon";
 
 export default function Header({ clearAll, getQuery }) {
 	const [isOpen, setIsOpen] = useState(false);

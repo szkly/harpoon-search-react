@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import SearchIcon from "./SearchIcon";
 import SearchHistory from "./SearchHistory";
+import SearchIcon from "./icons/SearchIcon";
 
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -39,7 +39,7 @@ export default function SearchBar({ getQuery }) {
 				type="text"
 				placeholder="Query"
 				value={query}
-				onChange={(evt) => setQuery(evt.target.value)}
+				onChange={(e) => setQuery(e.target.value)}
 				onFocus={() => setIsOpen(true)}
 				onBlur={() => setIsOpen(false)}
 			></input>
