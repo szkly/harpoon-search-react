@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import HeartIcon from "./icons/HeartIcon";
 
-export default function Ad({ ad }) {
+export default function Ad({ ad, onFavourite }) {
 	const HA_AD_URL = "https://hardverapro.hu/apro/";
 	const HA_SELLER_URL = "https://hardverapro.hu/tag/";
 
 	const locations = ad.locations;
+	const priceTag = isNaN(ad.price) ? ad.price.toUpperCase() : `${ad.price} Ft`;
 
-	const priceTag = ad.price === "Ingyenes" || ad.price === "Keresem" ? ad.price.toUpperCase() : `${ad.price} Ft`;
+	const [isFavourite, setIsFavourite] = useState(false);
+	const isFirstUpdate = useRef(true);
+
+	useEffect(() => {
+		if (isFirstUpdate.current) {
+			isFirstUpdate.current = false;
+			return;
+		}
+		onFavourite(ad);
+	}, [isFavourite]);
 
 	return (
 		<div className="relative w-full md:w-4/5 lg:w-2/3 xl:w-1/2 h-auto sm:h-80 md:h-64 pb-4 sm:p-4 mx-auto mb-8 md:my-4 flex flex-col sm:flex-row bg-white dark:bg-gray-800 dark:text-white md:rounded-lg sm:shadow-lg">
@@ -18,7 +28,7 @@ export default function Ad({ ad }) {
 				src={"https://hardverapro.hu/dl/uad" + ad.image.featured}
 			></img>
 
-			<div className="flex flex-col px-4 sm:px-0 pb-2 sm:pb-0 pt-2 sm:pt-0">
+			<div className="flex flex-col px-4 py-2 sm:p-0">
 				{locations && (
 					<div className="mt-2 sm:mt-0 mb-4">
 						{locations.map((location, i) => (
@@ -55,8 +65,11 @@ export default function Ad({ ad }) {
 				</div>
 			</div>
 
-			<button onClick={() => console.log(ad)} className="absolute top-1/4 right-1/2">
-				<HeartIcon classes="w-10 h-10"></HeartIcon>
+			<button
+				onClick={() => setIsFavourite((isFavourite) => !isFavourite)}
+				className="absolute top-1/4 right-1/2 focus:outline-none"
+			>
+				<HeartIcon classes={"w-10 h-10 " + (isFavourite ? "fill-red" : "")}></HeartIcon>
 			</button>
 		</div>
 	);
