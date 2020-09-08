@@ -4,7 +4,7 @@ import CloseIcon from "./icons/CloseIcon";
 
 export default function SearchHistory({ history, retrieveQuery, deleteItem, clearAll }) {
 	return (
-		<div className="absolute w-full flex flex-col items-center p-2 bg-indigo-600  rounded-bl-lg rounded-br-lg">
+		<div className="absolute z-10 w-full flex flex-col items-center p-2 bg-indigo-600  rounded-bl-lg rounded-br-lg">
 			{history.map((query, i) => {
 				return (
 					<div

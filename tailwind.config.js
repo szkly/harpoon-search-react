@@ -15,9 +15,22 @@ module.exports = {
 			borderWidth: {
 				6: "6px",
 			},
+			inset: {
+				"1/2": "0.5rem",
+				"1/4": "0.25rem",
+				1: "1rem",
+			},
+			stroke: (theme) => ({
+				red: theme("colors.red.600"),
+			}),
+			fill: (theme) => ({
+				red: theme("colors.red.600"),
+			}),
 		},
 	},
-	variants: {},
+	variants: {
+		fill: ["responsive", "hover", "focus"],
+	},
 	plugins: [
 		({ addUtilities, e, theme, variants }) => {
 			const colors = flattenColorPalette(theme("borderColor"));

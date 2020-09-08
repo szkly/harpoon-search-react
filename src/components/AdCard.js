@@ -1,15 +1,17 @@
 import React from "react";
 
+import HeartIcon from "./icons/HeartIcon";
+
 export default function Ad({ ad }) {
 	const HA_AD_URL = "https://hardverapro.hu/apro/";
 	const HA_SELLER_URL = "https://hardverapro.hu/tag/";
 
 	const locations = ad.locations;
 
-	const priceTag = ad.price === "Ingyenes" || ad.price === "Keresem" ? ad.price : `${ad.price} Ft`;
+	const priceTag = ad.price === "Ingyenes" || ad.price === "Keresem" ? ad.price.toUpperCase() : `${ad.price} Ft`;
 
 	return (
-		<div className="w-full md:w-4/5 lg:w-2/3 xl:w-1/2 h-auto sm:h-80 md:h-64 pb-4 sm:p-4 mx-auto mb-8 md:my-4 flex flex-col sm:flex-row bg-white dark:bg-gray-800 dark:text-white md:rounded-lg sm:shadow-lg">
+		<div className="relative w-full md:w-4/5 lg:w-2/3 xl:w-1/2 h-auto sm:h-80 md:h-64 pb-4 sm:p-4 mx-auto mb-8 md:my-4 flex flex-col sm:flex-row bg-white dark:bg-gray-800 dark:text-white md:rounded-lg sm:shadow-lg">
 			<img
 				className="w-full sm:w-1/3 lg:w-1/4 h-64 sm:h-auto object-cover sm:rounded sm:mr-4"
 				alt={ad.ad.title}
@@ -34,7 +36,7 @@ export default function Ad({ ad }) {
 					href={HA_AD_URL + ad.ad.slug}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="block text-lg sm:text-xl font-semibold mb-2 sm:break-all hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors duration-300"
+					className="text-lg sm:text-xl font-semibold mb-2 sm:break-words  hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors duration-300"
 				>
 					{ad.ad.title}
 				</a>
@@ -46,12 +48,16 @@ export default function Ad({ ad }) {
 						className="hover:text-indigo-700 dark:hover:text-indigo-500 transition-colors duration-300"
 						href={HA_SELLER_URL + ad.seller.slug}
 					>
-						{ad.seller.username}{" "}
+						{ad.seller.username + " "}
 					</a>
-					(<span className="text-green-600">{ad.seller.reputation.positive}</span>,{" "}
+					(<span className="text-green-600">{ad.seller.reputation.positive + ", "}</span>
 					<span className="text-red-600">{ad.seller.reputation.negative}</span>)
 				</div>
 			</div>
+
+			<button onClick={() => console.log(ad)} className="absolute top-1/4 right-1/2">
+				<HeartIcon classes="w-10 h-10"></HeartIcon>
+			</button>
 		</div>
 	);
 }
