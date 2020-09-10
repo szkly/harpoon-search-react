@@ -24,6 +24,8 @@ module.exports = {
 				red: theme("colors.red.600"),
 			}),
 			fill: (theme) => ({
+        transparent: theme("colors.transparent"),
+				white: theme("colors.white"),
 				red: theme("colors.red.600"),
 			}),
 		},
@@ -47,4 +49,7 @@ module.exports = {
 			addUtilities(utilities, variants("borderColor"));
 		},
 	],
+	future: {
+		removeDeprecatedGapUtilities: true,
+	},
 };

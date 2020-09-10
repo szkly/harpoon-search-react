@@ -3,12 +3,7 @@ import React from "react";
 export default function HeartIcon({ classes }) {
 	return (
 		<div>
-			<svg
-				fill="none"
-				viewBox="0 0 24 24"
-				className={"stroke-red hover:fill-red transition-colors duration-300" + classes}
-				xmlns="http://www.w3.org/2000/svg"
-			>
+			<svg fill="none" viewBox="0 0 24 24" className={classes} xmlns="http://www.w3.org/2000/svg">
 				<path
 					strokeLinecap="round"
 					strokeLinejoin="round"

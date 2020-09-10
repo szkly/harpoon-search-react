@@ -1,24 +1,20 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 
 import HeartIcon from "./icons/HeartIcon";
 
-export default function Ad({ ad, onFavourite }) {
-	const HA_AD_URL = "https://hardverapro.hu/apro/";
-	const HA_SELLER_URL = "https://hardverapro.hu/tag/";
+const HA_AD_URL = "https://hardverapro.hu/apro/";
+const HA_SELLER_URL = "https://hardverapro.hu/tag/";
 
+export default function Ad({ ad, hasAlreadyBeenFavourited, onFavourite }) {
 	const locations = ad.locations;
 	const priceTag = isNaN(ad.price) ? ad.price.toUpperCase() : `${ad.price} Ft`;
 
-	const [isFavourite, setIsFavourite] = useState(false);
-	const isFirstUpdate = useRef(true);
+  const [isFavourite, setIsFavourite] = useState(hasAlreadyBeenFavourited);
 
-	useEffect(() => {
-		if (isFirstUpdate.current) {
-			isFirstUpdate.current = false;
-			return;
-		}
+	const handleOnFavourite = () => {
+		setIsFavourite((oldIsFavourite) => !oldIsFavourite);
 		onFavourite(ad);
-	}, [isFavourite]);
+	};
 
 	return (
 		<div className="relative w-full md:w-4/5 lg:w-2/3 xl:w-1/2 h-auto sm:h-80 md:h-64 pb-4 sm:p-4 mx-auto mb-8 md:my-4 flex flex-col sm:flex-row bg-white dark:bg-gray-800 dark:text-white md:rounded-lg sm:shadow-lg">
@@ -65,11 +61,13 @@ export default function Ad({ ad, onFavourite }) {
 				</div>
 			</div>
 
-			<button
-				onClick={() => setIsFavourite((isFavourite) => !isFavourite)}
-				className="absolute top-1/4 right-1/2 focus:outline-none"
-			>
-				<HeartIcon classes={"w-10 h-10 " + (isFavourite ? "fill-red" : "")}></HeartIcon>
+			<button onClick={handleOnFavourite} className="absolute top-1/4 right-1/2 focus:outline-none">
+				<HeartIcon
+					classes={
+						"w-10 h-10 stroke-red transition-colors duration-300 " +
+						(isFavourite ? "fill-red hover:fill-transparent" : "hover:fill-red")
+					}
+				></HeartIcon>
 			</button>
 		</div>
 	);
